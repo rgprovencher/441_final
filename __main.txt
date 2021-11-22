@@ -1,0 +1,89 @@
+ big overview: a background cgi script reads in json data from our web interface. from this it writes a location on the board to a .txt file, which is read in by our main script. the main script takes that information and passes it to a step motor, which moves a stepper motor; then it activates the stepper motor. After the stepper motor has activated, it monitors the goal sensor for 10 seconds to see if there is a goal. If there is, it scrolls "GOOAALLLL!!!!" across the LED, then updates a score. 
+
+
+// functions don't need to be defined before main() as long as
+// the function headers are declared first.
+void waiting(); // writes "waiting" into the user_input file
+void bg_kill(); // writes a shutdown command into the post file read by the bg script
+
+
+void main()
+
+ try:
+
+  // initializes user input so code doesn't read an old "off" command
+  waiting() 
+  turn on score LEDs, set to 0
+
+  // loop runs until keyboard interrupt or "off" statement in user_input.txt
+  while 1: 
+
+    file = read in data from user_input.txt
+    data = {angle, speed, user}
+
+        if file == "off"
+          break          // will exit the loop and end the code
+
+        if file == "waiting"
+            waiting()
+            sleep for a second
+            continue         // returns to top of loop
+        
+        else
+          turn on camera            {CAM CLASS}
+          turn on sensors           {SENSOR CLASS}
+          activate the motors       {STEP CLASS}
+            kick the ball             {STEPPER CLASS}
+            // the motor class can do this
+
+                if scored:
+                    - stop reading sensors      {SENSORS}
+                    - activate buzzer           {BUZZER CLASS}
+                    - scroll "GOOAAALLL!!!"     {LED CLASS}
+                    - update LED score          {LED}
+                    - post_variable = "@user has scored <score>!" 
+
+                if no score after [10] seconds:
+                    // time should be long enough to get the full shot,
+                    // but short enough that the video size is as small
+                    // as possible. 5 seconds?
+                    - stop reading sensors      {SENSORS}
+                    - post_variable = "@user missed!"
+
+          camera saves the video to the file    {CAMERA}
+          open post.txt 
+            - write post_variable into post.txt
+            - close post.txt
+          sleep for a second
+          overwrite the user_input file with "waiting" and close it
+
+  // end of loop, returns to beginning of the "while: 1" loop
+
+  // the only way to reach this section is if the user_input file says "off"
+  print ("session ended by user") 
+  bg_kill()
+
+  //generalized exception handling
+ except: exception as e 
+    print(e)
+    bg_kill() // to shutdown the background script
+
+
+
+// used to wipe the user input text file 
+void waiting():
+  file = open('user_input.txt', 'w')
+  file.write("waiting")
+  file.close
+    
+// used to close the background cgi script when this code closes
+void bg_kill():
+  file = open('post.txt', 'w')
+  file.write("simon says shutdown")
+  file.close
+
+
+
+
+
+    
