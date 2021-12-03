@@ -35,7 +35,7 @@ us = US(US_TRIG, US_ECHO)
 servo = Servo(SERVO_PIN)
 
 
-timer = time.time()+10
+timer = time.time()+15
 goal = False
 
 
@@ -46,7 +46,7 @@ goal = False
 time.sleep(1)
 
 # stepper extends servo 
-step.goTo(2)
+step.goTo(5)
 
 time.sleep(1)
 
