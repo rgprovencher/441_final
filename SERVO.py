@@ -21,38 +21,46 @@ class Servo:
         self.cmd = cmd
         GPIO.setup(self.cmd, GPIO.OUT)
         self.pwm = GPIO.PWM(self.cmd, DUTY_CYCLE) # 50 Hz pwm on servo pin
-        
         self.pwm.start(0)
-        #self.__goAngle(0)
+        
+        
+
     
     def __goAngle(self, angle):
+        
+        
         
         # clean up input data
         angle = angle % 180
         # convert angle from degrees to a pwm %
         angle = float((angle/180))*float((FULL-ZERO)) + ZERO
         
-        
+       
         self.pwm.ChangeDutyCycle(angle)
+        
+        
+        
+       
 
     
     def kick(self):
+               
         
         # kick out fast
-        for i in range (0, 181, 1):
+        for i in range (50, 181, 1):
             self.__goAngle(i)
             time.sleep(0.001)
+        
         
         # pause
         time.sleep(1)
 
         
         # retract slow
-        for j in range(180, -1, -1):
+        for j in range(180, 49, -1):
             self.__goAngle(j)
             time.sleep(0.001)
-        
+
     
-    
-        
+        self.pwm.ChangeDutyCycle(0)
         

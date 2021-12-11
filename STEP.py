@@ -119,7 +119,10 @@ class Stepper:
         
     def goTo(self, location):
         # returns 1 if location is greater than current position, -1 if less
-        dir = int((location-self.position)/abs(location-self.position))
+        if (location - self.position == 0):
+            dir = 1
+        else:
+            dir = int((location-self.position)/abs(location-self.position))
         j = 0
         
         while (abs(location-self.position) > 0.1):
