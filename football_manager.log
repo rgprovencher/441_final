@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "kickbot_manager.py", line 28, in <module>
+    kickbot = Kickbot()
+  File "/home/pi/ENME441/441_final/KICKBOT.py", line 52, in __init__
+    LCD1602.clear()
+  File "/home/pi/ENME441/441_final/LCD1602.py", line 77, in clear
+    send_command(0x01) # Clear Screen
+  File "/home/pi/ENME441/441_final/LCD1602.py", line 21, in send_command
+    write_word(LCD_ADDR ,buf)
+  File "/home/pi/ENME441/441_final/LCD1602.py", line 15, in write_word
+    BUS.write_byte(addr ,temp)
+OSError: [Errno 121] Remote I/O error
