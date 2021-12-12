@@ -6,6 +6,17 @@
 # sudo nohup python3 kickbot_manager.py </dev/null >football_manager.log 2>&1 &
 # (must sudo to give it permission to write over the user_input file)
 
+# NOTE: code makes use of Twitbot, a class object that uses twitter API keys
+# to read and post to twitter. These keys were not submitted with this code, and
+# without them the code may fail to compile. If this is an issue and the code must
+# be compiled to review, the following lines must be commented out:
+    # line 24, the import statement
+    # line 38, the twitbot variable defenition
+    # line 46, twitbot.updateLastMention()
+    # lines 67-124, the twit_check() function
+    # lines 127-130, which initiate the twit-check daemon process
+    # line 220, which terminates the twitter process
+
 
 # import statements
 import json
