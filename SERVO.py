@@ -64,3 +64,20 @@ class Servo:
     
         self.pwm.ChangeDutyCycle(0)
         
+    
+    def kick2(self):
+        
+        # time to kick, in seconds
+        ttk = time.time()+.5  
+        while (time.time() < ttk):
+            self.__goAngle(180)
+            
+        time.sleep(1)
+        
+        ttk = time.time()+.5  
+        while (time.time() < ttk):
+            self.__goAngle(50)
+        
+        
+        
+        

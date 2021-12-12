@@ -1,3 +1,5 @@
+# class object to control ultrasonic sensors.
+
 import time
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
@@ -37,9 +39,7 @@ class US:
         while (GPIO.input(self.echo)==1):
             time_in = time.time()
         
-       
-        
-        
+  
         # multiply time elapsed by 34300 cm/s, then /2 to account for there-and-back
         dist = (time_in-time_out)*34300 / 2
         

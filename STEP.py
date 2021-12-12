@@ -1,3 +1,5 @@
+# class object to control stepper motors.
+
 import RPi.GPIO as GPIO
 import time
 GPIO.setmode(GPIO.BCM)
@@ -116,7 +118,8 @@ class Stepper:
         self.__halfstep(dir)
         # print("angle:  {} theta: {} diff: {}".format(angle, self.theta, abs(self.theta-angle)))
         
-        
+    # given a location, rotates the distance required to move the servo kicker
+    # to that location.
     def goTo(self, location):
         # returns 1 if location is greater than current position, -1 if less
         if (location - self.position == 0):

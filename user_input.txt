@@ -1,1 +1,1 @@
-{"waiting": "0", "position": "end"}
+{"waiting": "0", "position": "0", "goal": true, "source": "twitter"}
